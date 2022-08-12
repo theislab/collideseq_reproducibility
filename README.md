@@ -19,6 +19,7 @@ They create temporary data (such as h5ad files used in subsequent notebooks) and
 
 
 The notebooks by chapter contain the following code:
+
     - Chapter I: 
         - R markdown notebook 1a: contains ambient RNA correction with SoupX that is used in Notebook 1.
         	Note: On GEO, the unfiltered .h5 is supplied, not the .mtx. Export this file into the .mtx format for SoupX compatibility.
