@@ -1,0 +1,92 @@
+---
+title: "II_AHMO_1a_ambient_v3_0"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## SoupX analysis
+
+
+```{r input}
+library(SoupX)
+library(Matrix)
+# https://rawcdn.githack.com/constantAmateur/SoupX/650f7fa30b6c985486953b9ef8858c17fe7df68a/inst/doc/pbmcTutorial.html
+dir_in <- '/Users/davfischer/Documents/science/collideseq/data/rev6_fluorophores/cellranger/'
+dir_out <- '/Users/davfischer/Documents/science/collideseq/data/soupx/'
+```
+
+## Sample MUC12154
+
+```{r fn1, echo=TRUE}
+sc1 = load10X(dataDir=paste0(dir_in, 'MUC12154/'), verbose=TRUE)
+sc1 = autoEstCont(sc1)
+out1 = adjustCounts(sc1)
+writeMM(out1, paste0(dir_out, 'MUC12154/', 'matrix.mtx'))
+```
+
+```{r results1, echo=TRUE}
+ids <- c("Ascl1_transgene", "Myod1_transgene", "Hnf1a_transgene", "Pou5f1_transgene")
+print(rowMeans(sc1$toc[ids,] - out1[ids,]))
+for (x in ids){
+  plot(sc1$toc[x,], out1[x,])
+}
+plotChangeMap(sc1, out1, "Ascl1_transgene")
+```
+
+## Sample MUC13773
+
+```{r fn2, echo=TRUE}
+sc2 = load10X(dataDir=paste0(dir_in, 'MUC13773/'), verbose=TRUE)
+sc2 = autoEstCont(sc2)
+out2 = adjustCounts(sc2)
+writeMM(out2, paste0(dir_out, 'MUC13773/', 'matrix.mtx'))
+```
+
+```{r results2, echo=TRUE}
+library(Matrix)
+ids <- c("Ascl1_transgene", "Myod1_transgene", "Hnf1a_transgene", "Pou5f1_transgene")
+print(rowMeans(sc2$toc[ids,] - out2[ids,]))
+for (x in ids){
+  plot(sc2$toc[x,], out2[x,])
+}
+plotChangeMap(sc2, out2, "Ascl1_transgene")
+```
+
+## Sample MUC13774
+
+```{r fn3, echo=TRUE}
+sc3 = load10X(dataDir=paste0(dir_in, 'MUC13774/'), verbose=TRUE)
+sc3 = autoEstCont(sc3)
+out3 = adjustCounts(sc3)
+writeMM(out3, paste0(dir_out, 'MUC13774/', 'matrix.mtx'))
+```
+
+```{r results3, echo=TRUE}
+ids <- c("Ascl1_transgene", "Myod1_transgene", "Hnf1a_transgene", "Pou5f1_transgene")
+print(rowMeans(sc3$toc[ids,] - out3[ids,]))
+for (x in ids){
+  plot(sc3$toc[x,], out3[x,])
+}
+plotChangeMap(sc3, out3, "Ascl1_transgene")
+```
+
+## Sample MUC13775
+
+```{r fn4, echo=TRUE}
+sc4 = load10X(dataDir=paste0(dir_in, 'MUC13775/'), verbose=TRUE)
+sc4 = autoEstCont(sc4)
+out4 = adjustCounts(sc4)
+writeMM(out4, paste0(dir_out, 'MUC13775'))
+```
+
+```{r results4, echo=TRUE}
+ids <- c("Ascl1_transgene", "Myod1_transgene", "Hnf1a_transgene", "Pou5f1_transgene")
+print(rowMeans(sc4$toc[ids,] - out4[ids,]))
+for (x in ids){
+  plot(sc4$toc[x,], out4[x,])
+}
+plotChangeMap(sc4, out4, "Ascl1_transgene")
+```

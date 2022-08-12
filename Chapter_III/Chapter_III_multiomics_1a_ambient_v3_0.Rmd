@@ -1,0 +1,28 @@
+---
+title: "III_multiomics_1a_ambient_v3_0"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## SoupX analysis P21060
+
+
+```{r input2}
+library(SoupX)
+library(Matrix)
+# https://rawcdn.githack.com/constantAmateur/SoupX/650f7fa30b6c985486953b9ef8858c17fe7df68a/inst/doc/pbmcTutorial.html
+dir_in <- '/Users/davfischer/Documents/science/collideseq/data/P21060/cr_count/'
+dir_out <- '/Users/davfischer/Documents/science/collideseq/data/soupx/'
+```
+
+
+```{r fn2, echo=TRUE}
+sc1 = load10X(dataDir=dir_in, includeFeatures=c('Gene Expression'), verbose=TRUE)
+# Note on multiome data: You need to move the cellranger clustering from clustering/gex into clustering/ for SoupX to find it.
+sc1 = autoEstCont(sc1,soupQuantile=0.5)
+out1 = adjustCounts(sc1)
+writeMM(out1, paste0(dir_out, 'matrix.mtx'))
+```
